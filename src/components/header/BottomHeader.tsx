@@ -1,16 +1,9 @@
 import React from "react";
 import Container from "../Container";
 import Link from "next/link";
+import { navigation } from "@/constants";
 
 const BottomHeader = () => {
-  const navigation = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products" },
-    { title: "Categories", href: "/categories" },
-    { title: "Offers", href: "/offers" },
-    { title: "Blog", href: "/blog" },
-    { title: "Contact", href: "/contact" },
-  ];
   return (
     <div className="border-b border-b-gray-400">
       <Container className="flex items-center justify-between py-1">
