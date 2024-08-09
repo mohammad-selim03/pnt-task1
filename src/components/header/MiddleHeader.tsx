@@ -1,19 +1,25 @@
 "use client";
 import Container from "../Container";
 import Image from "next/image";
-import logo from "@/assets/logo.png";
 import { RiSearchLine, RiCloseLine } from "react-icons/ri";
 import { useState } from "react";
 import { LiaUser } from "react-icons/lia";
+import { MdFavoriteBorder } from "react-icons/md";
+import { BiShoppingBag } from "react-icons/bi";
+import Link from "next/link";
+import { logo } from "@/assets";
+import { RiMenu3Fill } from "react-icons/ri";
 
 const MiddleHeader = () => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <div className="border-b border-b-gray-600">
-      <Container className="py-5 flex items-center gap-20 justify-between">
-        <Image src={logo} alt="logo" className="w-28" />
-        <div className="flex-1 h-10 relative">
+    <div className="border-b-[1px] border-b-gray-400">
+      <Container className="py-5 flex items-center gap-4 md:gap-6 lg:gap-20 justify-between ">
+        <Link href={"/"}>
+          <Image src={logo} alt="logo" className="w-28" />
+        </Link>
+        <div className="hidden md:inline-flex flex-1 h-10 relative">
           <input
             type="text"
             placeholder="Search products here..."
@@ -33,10 +39,10 @@ const MiddleHeader = () => {
             <RiSearchLine />
           </span>
         </div>
-        <div>
+        <div className="hidden md:inline-flex items-center gap-3">
           {/* User */}
           <div className="flex items-center gap-2">
-            <div className="border-2 border-gray-700 p-2 rounded-full text-2xl">
+            <div className="border-2 border-gray-700 p-1.5 rounded-full text-xl">
               <LiaUser />
             </div>
             <div>
@@ -45,7 +51,22 @@ const MiddleHeader = () => {
             </div>
           </div>
           {/* Favorite Icon */}
+          <Link href={"/favorite"} className="text-2xl relative">
+            <MdFavoriteBorder />
+            <span className="absolute -top-1 -right-1 text-[10px] font-medium w-4 h-4 bg-themeColor text-white rounded-full flex items-center justify-center">
+              0
+            </span>
+          </Link>
           {/* Cart Icon */}
+          <Link href="/cart" className="text-2xl relative">
+            <BiShoppingBag />
+            <span className="absolute -top-1 -right-1 text-[10px] font-medium w-4 h-4 bg-themeColor text-white rounded-full flex items-center justify-center">
+              0
+            </span>
+          </Link>
+        </div>
+        <div className="text-3xl md:hidden text-gray-500 hover:text-themeColor duration-200 cursor-pointer">
+          <RiMenu3Fill />
         </div>
       </Container>
     </div>
