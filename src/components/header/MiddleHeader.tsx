@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "@/assets/logo.png";
 import { RiSearchLine, RiCloseLine } from "react-icons/ri";
 import { useState } from "react";
+import { LiaUser } from "react-icons/lia";
 
 const MiddleHeader = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -32,7 +33,20 @@ const MiddleHeader = () => {
             <RiSearchLine />
           </span>
         </div>
-        <div>MenuItems</div>
+        <div>
+          {/* User */}
+          <div className="flex items-center gap-2">
+            <div className="border-2 border-gray-700 p-2 rounded-full text-2xl">
+              <LiaUser />
+            </div>
+            <div>
+              <p className="text-xs">Hello, Guests</p>
+              <p className="text-sm">Login / Register</p>
+            </div>
+          </div>
+          {/* Favorite Icon */}
+          {/* Cart Icon */}
+        </div>
       </Container>
     </div>
   );
