@@ -5,7 +5,7 @@ import Image from "next/image";
 import { GoArrowRight } from "react-icons/go";
 
 const getData = async () => {
-  const response = await fetch(`https://shofy-ruddy.vercel.app/api/products`, {
+  const response = await fetch(`${process.env.API_URL}api/products`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
