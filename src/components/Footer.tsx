@@ -12,7 +12,7 @@ import { GrLocation } from "react-icons/gr";
 
 const Footer = () => {
   return (
-    <div className="bg-lightBg py-10 lg:py-20">
+    <div className="bg-lightBg py-10 lg:py-20 mt-20">
       <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="flex flex-col items-start gap-y-5">
           <Link href={"/"}>
