@@ -13,6 +13,7 @@ const config: Config = {
         lightBg: "#f4f7f9",
         themeWhite: "#ffffff",
         lightYellow: "#FFD43A",
+        themePrimary: "#0989FF",
       },
     },
   },

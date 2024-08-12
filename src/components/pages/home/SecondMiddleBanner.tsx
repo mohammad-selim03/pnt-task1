@@ -23,8 +23,8 @@ const SecondMiddleBanner = () => {
           </Button>
         </div>
         <div className="relative">
-          <Image src={img1} alt="banner image" />
-          <Image src={offerimg} alt="offer image" className="absolute top-0 left-20 w-24"/>
+          <Image src={img1} alt="banner image" className="hover:scale-110 hover:transition-all duration-200"/>
+          <Image src={offerimg} alt="offer image" className="absolute top-0 left-20 w-24 hover:scale-110 hover:transition-all duration-200"/>
         </div>
       </div>
     </Container>

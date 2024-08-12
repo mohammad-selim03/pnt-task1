@@ -14,7 +14,7 @@ const MiddleBanner = () => {
             <Image
               src={banner1}
               alt="product banner one "
-              className="h-[250px] w-[1000px] rounded-lg"
+              className="h-[250px] w-[1000px] rounded-lg hover:scale-110 hover:transition-all duration-200"
             />
           </div>
           <div className="absolute px-5 ml-7">
@@ -34,7 +34,7 @@ const MiddleBanner = () => {
               <Image
                 src={banner2}
                 alt="product banner one "
-                className="h-[250px] w-[660px]  rounded-lg"
+                className="h-[250px] w-[660px]  rounded-lg hover:scale-110 hover:transition-all duration-200"
               />
             </div>
             <div className="absolute px-5 ml-7">
