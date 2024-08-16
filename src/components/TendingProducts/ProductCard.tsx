@@ -46,7 +46,7 @@ const ProductCard = ({products}: Props) => {
         </p>
         <SideBar />
       </div>
-      <div className="border-t border-t-borderColor py-2 px-4 flex flex-col gap-y-1">
+      <div className="border-t border-t-borderColor py-2 px-4 flex flex-col gap-y-1 relative h-44">
         <p className="text-sm text-lightText capitalize font-medium">
           {products?.category}
         </p>

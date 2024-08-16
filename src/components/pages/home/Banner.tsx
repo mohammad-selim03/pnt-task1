@@ -12,6 +12,7 @@ const getData = async () => {
     },
   });
   return response.json();
+
 };
 
 const Banner = async () => {

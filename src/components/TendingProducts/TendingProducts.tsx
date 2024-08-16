@@ -6,7 +6,6 @@ import Products from "./Products";
 const TendingProducts = async () => {
 
   const products = await ProductsApi(process.env.API);
-  console.log(process.env.API)
 
   return (
     <div>
