@@ -1,9 +1,17 @@
-import React from 'react'
+// "use client";
+import Container from "../Container";
+import { ProductsApi } from "../ProductsAPI/ProductsApi";
+import Products from "./Products";
 
-const TendingProducts = () => {
+const TendingProducts = async () => {
+
+  const products = await ProductsApi("https://dummyjson.com/products");
+
   return (
-    <div>TendingProducts</div>
-  )
-}
+    <div>
+      <Products products={products} />
+    </div>
+  );
+};
 
-export default TendingProducts
+export default TendingProducts;
