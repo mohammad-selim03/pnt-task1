@@ -10,7 +10,6 @@ import TendingProducts from "@/components/TendingProducts/TendingProducts";
 export default function Home() {
   return (
     <main>
-      <BottomHeader />
       <Banner />
       <Category />
       <TendingProducts />

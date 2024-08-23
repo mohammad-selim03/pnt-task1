@@ -12,7 +12,7 @@ const BottomHeader = () => {
       <Container className="flex items-center justify-between h-[45px]">
         <div className="text-xs md:text-sm font-medium flex items-center gap-5">
           <div className="flex items-center justify-between px-3 cursor-pointer">
-            <p className="text-md font-semibold bg-themePrimary text-white h-[45px] w-[290px] px-3 flex items-center gap-2">
+            <p className="text-md font-semibold bg-themeColor text-white h-[45px] w-[290px] px-3 flex items-center gap-2">
               <CgMenuRightAlt size={20}/> All Departments
               <span>
                 <IoIosArrowDown className="ml-20" size={16} />{" "}

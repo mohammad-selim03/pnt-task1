@@ -2,16 +2,35 @@
 import Container from "../Container";
 import Image from "next/image";
 import { RiSearchLine, RiCloseLine } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LiaUser } from "react-icons/lia";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BiShoppingBag } from "react-icons/bi";
 import Link from "next/link";
 import { logo } from "@/assets";
 import { RiMenu3Fill } from "react-icons/ri";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { addUser } from "@/app/redux/shofySlice";
 
 const MiddleHeader = () => {
   const [searchValue, setSearchValue] = useState("");
+
+  const dispatch = useDispatch();
+  const { data: session , status} = useSession();
+
+
+  useEffect(() => {
+    if (status === 'authenticated' && session?.user) {
+
+      console.log('Dispatching user to Redux:', session.user);
+      dispatch(addUser(session?.user));
+    } 
+  }, [session?.user]);
+
+  if(status === "loading"){
+    return <div> loading...</div>
+  }
 
   return (
     <div className="border-b-[1px] border-b-gray-400 h-[90px]">
@@ -35,7 +54,7 @@ const MiddleHeader = () => {
             />
           )}
           <span className="w-[50px] h-[48px] bg-themePrimary inline-flex items-center justify-center text-white absolute top-0 right-0  duration-200 cursor-pointer">
-            <RiSearchLine size={25}/>
+            <RiSearchLine size={25} />
           </span>
         </div>
         <div className="hidden md:inline-flex items-center gap-3">
@@ -44,10 +63,23 @@ const MiddleHeader = () => {
             <div className="border-2 border-gray-700 p-1.5 rounded-full text-xl">
               <LiaUser />
             </div>
-            <div>
-              <p className="text-xs">Hello, Guests</p>
-              <p className="text-sm">Login / Register</p>
-            </div>
+            {session?.user ? (
+              <>
+                <div>
+                  <p
+                    className="text-md font-bold cursor-pointer"
+                    onClick={() => signOut()}
+                  >
+                    Logout
+                  </p>
+                </div>
+              </>
+            ) : (
+              <Link href={"/login"} onClick={() => signIn()}>
+                <p className="text-xs">Hello, Guests</p>
+                <p className="text-sm">Login / Register</p>
+              </Link>
+            )}
           </div>
           {/* Favorite Icon */}
           <Link href={"/favorite"} className="text-2xl relative">
