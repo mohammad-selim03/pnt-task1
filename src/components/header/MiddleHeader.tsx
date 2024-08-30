@@ -10,27 +10,27 @@ import Link from "next/link";
 import { logo } from "@/assets";
 import { RiMenu3Fill } from "react-icons/ri";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "@/app/redux/shofySlice";
 
 const MiddleHeader = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const dispatch = useDispatch();
-  const { data: session , status} = useSession();
+  const { data: session, status } = useSession();
 
+  const {cart} = useSelector((state) => state?.shofy);
 
   useEffect(() => {
-    if (status === 'authenticated' && session?.user) {
-
-      console.log('Dispatching user to Redux:', session.user);
+    if (status === "authenticated" && session?.user) {
+      console.log("Dispatching user to Redux:", session.user);
       dispatch(addUser(session?.user));
-    } 
+    }
   }, [session?.user]);
 
-  if(status === "loading"){
-    return <div> loading...</div>
-  }
+  // if(status === "loading"){
+  //   return <div> loading...</div>
+  // }
 
   return (
     <div className="border-b-[1px] border-b-gray-400 h-[90px]">
@@ -42,7 +42,7 @@ const MiddleHeader = () => {
           <input
             type="text"
             placeholder="Search products here..."
-            className="w-full h-[48px] outline-none border  border-themePrimary px-4 py-3"
+            className="w-full h-[48px] outline-none border  border-themeColor px-4 py-3"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
@@ -50,10 +50,10 @@ const MiddleHeader = () => {
           {searchValue && (
             <RiCloseLine
               onClick={() => setSearchValue("")}
-              className="text-xl absolute top-2.5 right-12 text-gray-500 hover:text-red-500 cursor-pointer duration-200"
+              className="text-xl absolute top-3.5 right-14 text-gray-500 hover:text-red-500 cursor-pointer duration-200"
             />
           )}
-          <span className="w-[50px] h-[48px] bg-themePrimary inline-flex items-center justify-center text-white absolute top-0 right-0  duration-200 cursor-pointer">
+          <span className="w-[50px] h-[48px] bg-themeColor inline-flex items-center justify-center text-white absolute top-0 right-0  duration-200 cursor-pointer">
             <RiSearchLine size={25} />
           </span>
         </div>
@@ -61,7 +61,14 @@ const MiddleHeader = () => {
           {/* User */}
           <div className="flex items-center gap-2">
             <div className="border-2 border-gray-700 p-1.5 rounded-full text-xl">
-              <LiaUser />
+              {session?.user ? (
+                <Link href={"/profile"}>
+                  {" "}
+                  <Image src={session?.user?.image!} alt="user img" width={50} height={50} className="rounded-full border-none" />
+                </Link>
+              ) : (
+                <LiaUser />
+              )}
             </div>
             {session?.user ? (
               <>
@@ -92,7 +99,7 @@ const MiddleHeader = () => {
           <Link href="/cart" className="text-2xl relative">
             <BiShoppingBag />
             <span className="absolute -top-1 -right-1 text-[10px] font-medium w-4 h-4 bg-themeColor text-white rounded-full flex items-center justify-center">
-              0
+             {cart?.length > 0 ? cart?.length : "0"}
             </span>
           </Link>
         </div>

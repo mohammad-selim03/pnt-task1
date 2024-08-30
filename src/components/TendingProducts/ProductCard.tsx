@@ -7,10 +7,10 @@ import { ProductType } from "../../../type";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 interface Props {
-    products: ProductType;
+    product: ProductType;
   }
 
-const ProductCard = ({products}: Props) => {
+const ProductCard = ({product}: Props) => {
 
     
       
@@ -34,28 +34,28 @@ const ProductCard = ({products}: Props) => {
     <div className="border border-borderColor hover:shadow-lg hover:shadow-black/30 duration-300 rounded-md group overflow-hidden">
       <div className=" relative">
         <Image
-          src={products?.images[0]}
+          src={product?.images[0]}
           alt="product-image"
           width={500}
           height={500}
           className="w-full h-64 object-contain hover:scale-110 duration-300"
         />
         <p className="absolute top-2 right-2 bg-orange-600 text-white py-1 px-2 text-xs rounded-lg flex items-center">
-          {products?.rating}
+          {product?.rating}
           <MdStar />
         </p>
         <SideBar />
       </div>
       <div className="border-t border-t-borderColor py-2 px-4 flex flex-col gap-y-1 relative h-44">
         <p className="text-sm text-lightText capitalize font-medium">
-          {products?.category}
+          {product?.category}
         </p>
 
         <h2 className="font-semibold text-base line-clamp-2">
-          {products?.title}
+          {product?.title}
         </h2>
-        <p className="font-semibold text-skyColor">${products?.price}</p>
-        <AddToCartButton />
+        <p className="font-semibold text-skyColor">${product?.price}</p>
+        <AddToCartButton product={product}/>
       </div>
     </div>
   )

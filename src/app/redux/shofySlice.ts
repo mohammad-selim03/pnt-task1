@@ -1,18 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// Define the shape of your state
-interface User {
-  name: string;
-  image: string;
-}
-
-interface ShofyState {
-  cart: any[]; // Specify a type for cart items if known
-  userInfo: User | null;
-}
+import { createSlice } from "@reduxjs/toolkit";
 
 // Initial state
-const initialState: ShofyState = {
+const initialState = {
   cart: [],
   userInfo: null,
 };
@@ -22,19 +11,38 @@ const shofySlice = createSlice({
   name: "shofy",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<any[]>) => { // Define a proper type for cart items
-      state.cart = action.payload;
+    addToCart: (state, action) => {
+      const existingProduct = state?.cart?.find(
+        (item) => item?.id === action.payload.id
+      );
+      if (existingProduct) {
+        existingProduct.quantity! += 1;
+      } else {
+        state.cart.push({ ...action.payload, quantity: 1 });
+      }
     },
-    addUser: (state, action: PayloadAction<User>) => {
+    increaseQuantity: (state, action) => {
+      const existingProduct = state.cart.find(
+        (item) => item?.id === action.payload
+      );
+      if (existingProduct) {
+        existingProduct.quantity! += 1;
+      }
+    },
+    decreaseQuantity: (state, action) => {
+      const existingProduct = state.cart.find(
+        (item) => item?.id === action.payload
+      );
+      if (existingProduct) {
+        existingProduct.quantity! -= 1;
+      }
+    },
+    addUser: (state, action) => {
       state.userInfo = action.payload;
     },
-    // Uncomment if you need this action
-    // removeUser: (state) => {
-    //   state.userInfo = null;
-    // },
   },
 });
 
-// Export actions and reducer
-export const { addToCart, addUser } = shofySlice.actions;
+export const { addToCart, addUser, increaseQuantity, decreaseQuantity } =
+  shofySlice.actions;
 export default shofySlice.reducer;

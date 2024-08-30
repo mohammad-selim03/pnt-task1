@@ -28,7 +28,7 @@ const BottomHeader = () => {
         <div className="md:inline-flex items-center gap-3 hidden">
           <span>
             {" "}
-            <FiPhoneCall className="text-themePrimary"/>{" "}
+            <FiPhoneCall className="text-themeColor"/>{" "}
           </span>
           <p className="text-xs text-gray-400 font-medium ">
             Hotline: <br /><span className="text-black">+88 01012345678</span>

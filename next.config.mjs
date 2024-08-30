@@ -11,6 +11,9 @@ const nextConfig = {
          protocol: "https", 
          hostname: "cdn.dummyjson.com"
         }, 
+        {
+          hostname:"avatars.githubusercontent.com"
+        }
     ],
   },
 };
