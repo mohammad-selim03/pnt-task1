@@ -46,29 +46,27 @@ const BottomHeader = () => {
       },
     ];
     return (
-      <div className="absolute translate-y-96 group-hover:translate-y-[200px] bg-white text-black ">
-        <div>
-          <h3 className="text-xl font-semibold">
-            {departments?.map((dep, index) => (
-              <div
-                key={index}
-                className="w-72 h-full flex items-center gap-3 p-4 text-black"
-              >
-                {dep?.icons}
-                {dep?.title}
-              </div>
-            ))}
-          </h3>
-        </div>
+      <div className="absolute top-full left-[12px] w-[290px] bg-white text-black shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 translate-y-[-20px] ">
+      <div>
+        {departments?.map((dep, index) => (
+          <div
+            key={index}
+            className="w-full flex items-center gap-3 p-4 capitalize hover:bg-gray-100 transition-all duration-200 cursor-pointer"
+          >
+            {dep?.icons}
+            <span className="text-sm">{dep?.title}</span>
+          </div>
+        ))}
       </div>
+    </div>
     );
   };
   return (
     <div className="border-b border-b-gray-400 ">
-      <Container className="flex items-center justify-between h-[45px] group overflow-hidden">
-        <div className="text-xs md:text-sm font-medium flex items-center gap-5 relative">
-          <div className="flex items-center justify-between px-3 cursor-pointer ">
-              <p className="text-md font-semibold bg-themeColor hover:bg-black transition-all duration-300 text-white h-[45px] w-[290px] px-3 flex items-center gap-2  ">
+      <Container className="flex items-center justify-between h-[45px] ">
+        <div className="text-xs md:text-sm font-medium flex items-center gap-5  ">
+          <div className="flex items-center justify-between px-3 cursor-pointer group relative ">
+              <p className="text-md font-semibold bg-themeColor hover:bg-black transition-all duration-300 text-white h-[45px] w-[290px] px-3 flex items-center gap-2 ">
                 <CgMenuRightAlt size={20} /> All Departments
                 <span>
                   <IoIosArrowDown className="ml-20" size={16} />{" "}

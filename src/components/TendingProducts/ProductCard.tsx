@@ -51,7 +51,7 @@ const ProductCard = ({ product }: Props) => {
           {product?.category}
         </p>
 
-        <h2 className="font-semibold text-base line-clamp-2">
+        <h2 className="font-semibold text-base line-clamp-2 h-12">
           {product?.title}
         </h2>
         <p className="font-semibold text-skyColor">${product?.price}</p>
