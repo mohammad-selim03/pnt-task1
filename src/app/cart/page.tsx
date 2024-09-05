@@ -3,38 +3,46 @@ import Image from "next/image";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { decreaseQuantity, increaseQuantity } from "../redux/shofySlice";
-import { useEffect } from "react";
+import { decreaseQuantity, increaseQuantity, removeFromCart } from "../redux/shofySlice";
+import Link from "next/link";
+import CheckOutPage from "../checkout/page";
+import Container from "@/components/Container";
 
 const CartPage = () => {
   const { cart } = useSelector((state) => state.shofy);
   const dispatch = useDispatch();
 
-
-  const handlePlus = (id) => {
-    dispatch(increaseQuantity(id))
-
-  }
-  const handleMinus = (id) => {
+  const handlePlus = (id: number) => {
+    dispatch(increaseQuantity(id));
+  };
+  const handleMinus = (id: number) => {
     dispatch(decreaseQuantity(id));
-  }
+  };
+
+  let totalPrice = 0;
+  cart.forEach((item:any) => {
+    const price = item?.price;
+    const quantity = item?.quantity;
+    totalPrice += price * quantity;
+  })
 
   return (
-    <div>
-      <h3 className="text-2xl font-bold mt-5 mb-16">Products Details</h3>
-      <div className="grid grid-cols-12">
+    <Container>
+      <h3 className="text-2xl font-bold mt-5 mb-16">Products Cart</h3>
+      <div className=" md:grid grid-cols-12">
         <div className="   border-gray-500 col-span-9">
-          {cart?.map((item) => (
+          {cart?.map((item: any) => (
             <div key={item?.id}>
               <div className="flex items-center justify-between h-40 gap-3 border-b-2 px-3   ">
-                <Image
-                  src={item?.images[0]}
-                  alt="product image"
-                  width={100}
-                  height={100}
-                  className="rounded-xl"
-                />
-
+                <Link href={`products/${item?.id}`}>
+                  <Image
+                    src={item?.images[0]}
+                    alt="product image"
+                    width={150}
+                    height={150}
+                    className="rounded-xl"
+                  />
+                </Link>
                 <div className="w-72">
                   <p className="text-lg font-semibold">{item?.title}</p>
                   <p className="text-xs text-gray-500">
@@ -42,28 +50,41 @@ const CartPage = () => {
                   </p>
                   <p className="text-sm font-semibold">{item?.brand}</p>
                 </div>
-                <p className="text-md text-semibold">${item?.price}</p>
-                <div className="flex items-center gap-3 border-2 border-gray-500 rounded-md px-3 py-2">
-                  <button onClick={() => handleMinus(item?.id)}>
+                <p className="text-md text-semibold">
+                  $
+                  {item?.price && item?.quantity
+                    ? (item.price * item.quantity).toFixed(2)
+                    : "0.00"}
+                </p>
+                <div className="flex items-center justify-between gap-3 border-2 border-gray-500 rounded-md w-32 px-4 py-2">
+                  <button
+                    onClick={() => handleMinus(item?.id)}
+                    disabled={item?.quantity === 1}
+                  >
                     <FaMinus />
                   </button>
                   <p className="text-base text-bold">
-                    {item?.quantity > 1 ? item?.quantity : 0}
+                    {item?.quantity >= 1 ? item?.quantity : 0}
                   </p>
-                  <button>
-                    <FaPlus onClick={() => handlePlus(item?.id)} />
+                  <button
+                    onClick={() => handlePlus(item?.id)}
+                    disabled={item?.quantity === 10}
+                  >
+                    <FaPlus />
                   </button>
                 </div>
                 <span className="hover:text-red-500 cursor-pointer translate-all duration-300">
-                  <MdDelete size={25} />
+                  <MdDelete size={25} onClick={() => dispatch(removeFromCart(item?.id))}/>
                 </span>
               </div>
             </div>
           ))}
         </div>
-        <div className="col-span-3">checkout process</div>
+        <div className="col-span-3">
+          <CheckOutPage cart={cart} totalPrice={totalPrice}/>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

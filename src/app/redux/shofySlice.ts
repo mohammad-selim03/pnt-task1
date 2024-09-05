@@ -11,9 +11,9 @@ const shofySlice = createSlice({
   name: "shofy",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state:any, action) => {
       const existingProduct = state?.cart?.find(
-        (item) => item?.id === action.payload.id
+        (item:any) => item?.id === action.payload.id
       );
       if (existingProduct) {
         existingProduct.quantity! += 1;
@@ -21,17 +21,20 @@ const shofySlice = createSlice({
         state.cart.push({ ...action.payload, quantity: 1 });
       }
     },
-    increaseQuantity: (state, action) => {
+    removeFromCart:(state:any, action) => {
+      state.cart = state.cart.filter((item:any) => item?.id !== action.payload)
+    },
+    increaseQuantity: (state:any, action) => {
       const existingProduct = state.cart.find(
-        (item) => item?.id === action.payload
+        (item:any) => item?.id === action.payload
       );
       if (existingProduct) {
         existingProduct.quantity! += 1;
       }
     },
-    decreaseQuantity: (state, action) => {
+    decreaseQuantity: (state:any, action) => {
       const existingProduct = state.cart.find(
-        (item) => item?.id === action.payload
+        (item:any) => item?.id === action.payload
       );
       if (existingProduct) {
         existingProduct.quantity! -= 1;
@@ -43,6 +46,6 @@ const shofySlice = createSlice({
   },
 });
 
-export const { addToCart, addUser, increaseQuantity, decreaseQuantity } =
+export const { addToCart, addUser, increaseQuantity, decreaseQuantity, removeFromCart } =
   shofySlice.actions;
 export default shofySlice.reducer;

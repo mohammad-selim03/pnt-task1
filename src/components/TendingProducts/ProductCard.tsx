@@ -29,9 +29,9 @@ const ProductCard = ({ product }: Props) => {
   };
 
   return (
-    <Link href={`products/${product?.id}`} className="cursor-pointer">
-      <div className="border border-borderColor hover:shadow-lg hover:shadow-black/30 duration-300 rounded-md group overflow-hidden">
-        <div className=" relative">
+    <div className="border border-borderColor hover:shadow-lg hover:shadow-black/30 duration-300 rounded-md group overflow-hidden">
+      <div className=" relative">
+        <Link href={`products/${product?.id}`} className="cursor-pointer">
           <Image
             src={product?.images[0]}
             alt="product-image"
@@ -39,25 +39,25 @@ const ProductCard = ({ product }: Props) => {
             height={500}
             className="w-full h-64 object-contain hover:scale-110 duration-300"
           />
-          <p className="absolute top-2 right-2 bg-orange-600 text-white py-1 px-2 text-xs rounded-lg flex items-center">
-            {product?.rating}
-            <MdStar />
-          </p>
-          <SideBar />
-        </div>
-        <div className="border-t border-t-borderColor py-2 px-4 flex flex-col gap-y-1 relative h-44">
-          <p className="text-sm text-lightText capitalize font-medium">
-            {product?.category}
-          </p>
-
-          <h2 className="font-semibold text-base line-clamp-2">
-            {product?.title}
-          </h2>
-          <p className="font-semibold text-skyColor">${product?.price}</p>
-          <AddToCartButton product={product} />
-        </div>
+        </Link>
+        <p className="absolute top-2 right-2 bg-orange-600 text-white py-1 px-2 text-xs rounded-lg flex items-center">
+          {product?.rating}
+          <MdStar />
+        </p>
+        <SideBar />
       </div>
-    </Link>
+      <div className="border-t border-t-borderColor py-2 px-4 flex flex-col gap-y-1 relative h-44">
+        <p className="text-sm text-lightText capitalize font-medium">
+          {product?.category}
+        </p>
+
+        <h2 className="font-semibold text-base line-clamp-2">
+          {product?.title}
+        </h2>
+        <p className="font-semibold text-skyColor">${product?.price}</p>
+        <AddToCartButton product={product} />
+      </div>
+    </div>
   );
 };
 

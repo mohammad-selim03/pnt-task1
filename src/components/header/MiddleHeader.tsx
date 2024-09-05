@@ -13,6 +13,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "@/app/redux/shofySlice";
 
+
 const MiddleHeader = () => {
   const [searchValue, setSearchValue] = useState("");
 
