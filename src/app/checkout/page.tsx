@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-const CheckOutPage = ({ cart, totalPrice }) => {
+const CheckOutPage = ({ cart, totalPrice }:any) => {
   let tax = 15;
   return (
     <div className="shadow-themeColor/30 sticky top-60 shadow-xl p-4 rounded-md lg:ml-10 w-full">

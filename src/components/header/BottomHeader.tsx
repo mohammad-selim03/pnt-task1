@@ -47,7 +47,7 @@ const BottomHeader = () => {
     ];
     return (
       <div className="absolute top-full left-[12px] w-[290px] bg-white text-black shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 translate-y-[-20px] ">
-      <div>
+      {/* <div>
         {departments?.map((dep, index) => (
           <div
             key={index}
@@ -57,7 +57,7 @@ const BottomHeader = () => {
             <span className="text-sm">{dep?.title}</span>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
     );
   };

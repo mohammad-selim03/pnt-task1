@@ -29,9 +29,7 @@ const MiddleHeader = () => {
     }
   }, [session?.user]);
 
-  // if(status === "loading"){
-  //   return <div> loading...</div>
-  // }
+
 
   return (
     <div className="border-b-[1px] border-b-gray-400 h-[90px]">
@@ -61,7 +59,7 @@ const MiddleHeader = () => {
         <div className="hidden md:inline-flex items-center gap-3">
           {/* User */}
           <div className="flex items-center gap-2">
-            <div className="border-2 border-gray-700 p-1.5 rounded-full text-xl">
+            <div className=" p-1.5 rounded-full text-xl">
               {session?.user ? (
                 <Link href={"/profile"}>
                   {" "}

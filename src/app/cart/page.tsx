@@ -34,13 +34,13 @@ const CartPage = () => {
           {cart?.map((item: any) => (
             <div key={item?.id}>
               <div className="flex items-center justify-between h-40 gap-3 border-b-2 px-3   ">
-                <Link href={`products/${item?.id}`}>
+                <Link href={`products/${item?.id}`} className="object-contain">
                   <Image
                     src={item?.images[0]}
                     alt="product image"
                     width={150}
                     height={150}
-                    className="rounded-xl"
+                    className="rounded-xl object-contain"
                   />
                 </Link>
                 <div className="w-72">

@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const AddToCartButton = ({ product }: any) => {
   const { cart } = useSelector((state: any) => state.shofy);
   const [existingProduct, setExistingProduct] = useState(null);
