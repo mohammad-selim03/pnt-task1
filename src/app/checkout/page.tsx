@@ -1,3 +1,4 @@
+import CheckoutBtn from "@/components/checkoutBtn/CheckoutBtn";
 import Link from "next/link";
 
 
@@ -26,9 +27,7 @@ const CheckOutPage = ({ cart, totalPrice }:any) => {
         </div>
       </div>
       <div>
-        <button className="capitalize font-bold text-white bg-black mt-5 h-12 rounded-md w-full" onClick={() => window.alert("Unfortunatly, checkout not available at the moment.!")}>
-          proceed to checkout
-        </button>
+       <CheckoutBtn cart={cart}/>
       </div>
       <Link href={"/"}>
         {" "}
