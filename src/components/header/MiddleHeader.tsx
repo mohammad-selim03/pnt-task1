@@ -24,7 +24,6 @@ const MiddleHeader = () => {
 
   useEffect(() => {
     if (status === "authenticated" && session?.user) {
-      console.log("Dispatching user to Redux:", session.user);
       dispatch(addUser(session?.user));
     }
   }, [session?.user]);

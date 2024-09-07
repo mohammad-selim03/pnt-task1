@@ -1,5 +1,4 @@
 "use client";
-
 import {
   addToCart,
   decreaseQuantity,
@@ -18,7 +17,7 @@ const AddToCartButton = ({ product }: any) => {
 
   useEffect(() => {
     // this method will be set existing product on redux cart & we can use it wherever we want.
-    const availableProduct = cart?.find((item) => item?.id === product?.id);
+    const availableProduct = cart?.find((item:any) => item?.id === product?.id);
     if (availableProduct) setExistingProduct(availableProduct);
   }, [cart, product]);
 
@@ -41,6 +40,7 @@ const AddToCartButton = ({ product }: any) => {
       toast.error("Quantity can't be decress less than 1");
     }
   };
+
 
   return (
     <>
