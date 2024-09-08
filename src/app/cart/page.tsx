@@ -7,11 +7,11 @@ import { decreaseQuantity, increaseQuantity, removeFromCart } from "../redux/sho
 import Link from "next/link";
 import CheckOutPage from "../checkout/page";
 import Container from "@/components/Container";
+import { IoMdCheckmark } from "react-icons/io";
 
 const CartPage = () => {
-  const { cart } = useSelector((state) => state.shofy);
+  const { cart } = useSelector((state:any) => state.shofy);
   const dispatch = useDispatch();
-
   const handlePlus = (id: number) => {
     dispatch(increaseQuantity(id));
   };
@@ -45,8 +45,8 @@ const CartPage = () => {
                 </Link>
                 <div className="w-72">
                   <p className="text-lg font-semibold">{item?.title}</p>
-                  <p className="text-xs text-gray-500">
-                    {item?.availabilityStatus}
+                  <p className="text-xs text-gray-500 font-bold  flex items-center gap-2">
+                    <span className="text-green-500 "><IoMdCheckmark size={18}/></span>{item?.availabilityStatus}
                   </p>
                   <p className="text-sm font-semibold">{item?.brand}</p>
                 </div>

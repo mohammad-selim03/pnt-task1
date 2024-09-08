@@ -21,6 +21,7 @@ const MiddleHeader = () => {
   const { data: session, status } = useSession();
 
   const {cart} = useSelector((state) => state?.shofy);
+  const {favorite} = useSelector((state) => state?.shofy);
 
   useEffect(() => {
     if (status === "authenticated" && session?.user) {
@@ -90,7 +91,7 @@ const MiddleHeader = () => {
           <Link href={"/favorite"} className="text-2xl relative">
             <MdFavoriteBorder />
             <span className="absolute -top-1 -right-1 text-[10px] font-medium w-4 h-4 bg-themeColor text-white rounded-full flex items-center justify-center">
-              0
+              {favorite?.length > 0 ? favorite?.length : "0"}
             </span>
           </Link>
           {/* Cart Icon */}

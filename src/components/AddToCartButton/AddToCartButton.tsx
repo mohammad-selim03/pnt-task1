@@ -63,7 +63,7 @@ const AddToCartButton = ({ product }: any) => {
       ) : (
         <button
           onClick={handleAddToCart}
-          className="bg-transparent border border-skyColor text-black rounded-full py-1.5 hover:bg-skyColor hover:text-white duration-300 my-2"
+          className="bg-transparent border border-themeColor text-black rounded-full py-1.5 hover:bg-skyColor hover:text-white duration-300 my-2"
         >
           Add to cart
         </button>

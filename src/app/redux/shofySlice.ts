@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 // Initial state
 const initialState = {
   cart: [],
   userInfo: null,
+  favorite: [],
 };
 
 // Create the slice
@@ -11,9 +13,12 @@ const shofySlice = createSlice({
   name: "shofy",
   initialState,
   reducers: {
-    addToCart: (state:any, action) => {
+    addToFavorite: (state: any, action) => {
+      state.favorite.push({ ...action.payload });
+    },
+    addToCart: (state: any, action) => {
       const existingProduct = state?.cart?.find(
-        (item:any) => item?.id === action.payload.id
+        (item: any) => item?.id === action.payload.id
       );
       if (existingProduct) {
         existingProduct.quantity! += 1;
@@ -21,20 +26,22 @@ const shofySlice = createSlice({
         state.cart.push({ ...action.payload, quantity: 1 });
       }
     },
-    removeFromCart:(state:any, action) => {
-      state.cart = state.cart.filter((item:any) => item?.id !== action.payload)
+    removeFromCart: (state: any, action) => {
+      state.cart = state.cart.filter(
+        (item: any) => item?.id !== action.payload
+      );
     },
-    increaseQuantity: (state:any, action) => {
+    increaseQuantity: (state: any, action) => {
       const existingProduct = state.cart.find(
-        (item:any) => item?.id === action.payload
+        (item: any) => item?.id === action.payload
       );
       if (existingProduct) {
         existingProduct.quantity! += 1;
       }
     },
-    decreaseQuantity: (state:any, action) => {
+    decreaseQuantity: (state: any, action) => {
       const existingProduct = state.cart.find(
-        (item:any) => item?.id === action.payload
+        (item: any) => item?.id === action.payload
       );
       if (existingProduct) {
         existingProduct.quantity! -= 1;
@@ -46,6 +53,12 @@ const shofySlice = createSlice({
   },
 });
 
-export const { addToCart, addUser, increaseQuantity, decreaseQuantity, removeFromCart } =
-  shofySlice.actions;
+export const {
+  addToFavorite,
+  addToCart,
+  addUser,
+  increaseQuantity,
+  decreaseQuantity,
+  removeFromCart,
+} = shofySlice.actions;
 export default shofySlice.reducer;

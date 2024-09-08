@@ -1,29 +1,46 @@
-"use client"
-import { addToCart, decreaseQuantity, increaseQuantity } from "@/app/redux/shofySlice";
+"use client";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/app/redux/shofySlice";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProductCartBtn = ({product}:any) => {
-    const dispatch = useDispatch();
+const ProductCartBtn = ({ product }: any) => {
+  const [existingProduct, setExistingProduct] = useState(null);
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state:any) => state.shofy);
 
-const handleAddtoCart = () => {
-  if (product) {
-    dispatch(addToCart(product?.id));
-    toast.success("Product add to cart.!");
-  }
-};
+  useEffect(() => {
+    // this method will be set existing product on redux cart & we can use it wherever we want.
+    const availableProduct = cart?.find(
+      (item: any) => item?.id === product?.id
+    );
+    if (availableProduct) setExistingProduct(availableProduct);
+  }, [cart, product]);
 
-const handleIncrement = () => {
-  dispatch(increaseQuantity(product?.id));
-  toast.success("Product quantity increased.!");
-};
+  const handleAddtoCart = () => {
+    if (product) {
+      dispatch(addToCart(product));
+      toast.success("Product add to cart.!");
+    }
+  };
 
-const handleDecrement = () => {
-  if (product.quantity > 1) {
-    dispatch(decreaseQuantity(product?.id));
-    toast.success("Product quantity decreased.!");
-  }
-};
+  const handleIncrement = () => {
+    dispatch(increaseQuantity(product?.id));
+    toast.success("Product quantity increased.!");
+  };
+
+  const handleDecrement = () => {
+    if (existingProduct?.quantity > 1) {
+      dispatch(decreaseQuantity(product?.id));
+      toast.success("Quantity decreased.!");
+    } else {
+      toast.error("Quantity can't be decress less than 1");
+    }
+  };
   return (
     <div>
       <p>Quantity</p>
@@ -44,7 +61,10 @@ const handleDecrement = () => {
           </p>
         </div>
         <div className="w-full">
-          <button className="border border-black text-black hover:bg-black hover:text-white transition-all duration-300 font-semibold w-full rounded-md h-12" onClick={handleAddtoCart}>
+          <button
+            className="border border-black text-black hover:bg-black hover:text-white transition-all duration-300 font-semibold w-full rounded-md h-12"
+            onClick={handleAddtoCart}
+          >
             Add To Cart
           </button>
         </div>

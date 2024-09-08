@@ -6,23 +6,37 @@ import { LuEye } from "react-icons/lu";
 import { ProductType } from "../../../type";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addToCart, addToFavorite } from "@/app/redux/shofySlice";
+import toast from "react-hot-toast";
 
 interface Props {
   product: ProductType;
 }
 
 const ProductCard = ({ product }: Props) => {
+  const dispatch = useDispatch()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product))
+    toast.success("Product added to the cart.!")
+  }
+  const handleAddToFavorite = () => {
+    dispatch(addToFavorite(product));
+    toast.success("Product added to the favorite.!");
+  }
+  
   const SideBar = () => {
     return (
       <div className="absolute right-2 bottom-12 border flex flex-col text-2xl border-borderColor bg-white rounded-md overflow-hidden transform translate-x-20 group-hover:translate-x-0 duration-300">
         <button className="p-2 hover:bg-skyColor duration-300 hover:text-white">
-          <FiShoppingCart />
+          <FiShoppingCart onClick={handleAddToCart}/>
         </button>
         <button className="p-2 hover:bg-skyColor duration-300 hover:text-white border-y border-y-borderColor">
           <LuEye />
         </button>
         <button className="p-2 hover:bg-skyColor duration-300 hover:text-white">
-          <MdFavoriteBorder />
+          <MdFavoriteBorder onClick={handleAddToFavorite}/>
         </button>
       </div>
     );
@@ -54,7 +68,7 @@ const ProductCard = ({ product }: Props) => {
         <h2 className="font-semibold text-base line-clamp-2 h-12">
           {product?.title}
         </h2>
-        <p className="font-semibold text-skyColor">${product?.price}</p>
+        <p className="font-semibold text-themeyColor">${product?.price}</p>
         <AddToCartButton product={product} />
       </div>
     </div>
