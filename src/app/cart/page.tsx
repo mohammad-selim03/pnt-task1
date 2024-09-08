@@ -66,7 +66,16 @@ const CartPage = () => {
                   <p className="text-base text-bold">
                     {item?.quantity >= 1 ? item?.quantity : 0}
                   </p>
-                  
+                  <button
+                    onClick={() => handlePlus(item?.id)}
+                    disabled={item?.quantity === 10}
+                  >
+                    <FaPlus />
+                  </button>
+                </div>
+                <span className="hover:text-red-500 cursor-pointer translate-all duration-300">
+                  <MdDelete size={25} onClick={() => dispatch(removeFromCart(item?.id))}/>
+                </span>
               </div>
             </div>
           ))}
